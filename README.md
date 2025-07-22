@@ -13,9 +13,9 @@ Project Week 2 - MEN Stack CRUD App Project
 
 ## Deployment link
 
-Project planning link:
+Project planning link: https://trello.com/invite/b/687dfaf258f17024bc91ee5a/ATTI88bfd45606d04b2bb32a77e1ee3b71c6B105D51A/sheffield-venues-info-and-reviews
 
-GitHub repo link:
+GitHub repo link: https://github.com/Kalamori/Sheffield-Venues
 
 Deployed project link: 
 
