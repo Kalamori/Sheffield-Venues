@@ -5,6 +5,7 @@ import mongoose from 'mongoose'
 import methodOverride from 'method-override'
 import morgan from 'morgan'
 import session from 'express-session'
+import MongoStore from 'connect-mongo'
 
 const app = express()
 
@@ -26,6 +27,9 @@ app.use(
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
+        store: MongoStore.create({
+            mongoUrl: process.env.MONGODB_URI
+        })
     })
 )
 
@@ -36,6 +40,16 @@ app.get("/", async (req,res) => {
 })
 
 app.use('/auth', authController)
+
+app.get("/vip-lounge", (req, res) => {
+  if (req.session.user) {
+    res.send(`Welcome to the party ${req.session.user.username}.`);
+  } else {
+    res.send("Sorry, no guests allowed.");
+  }
+});
+
+
 
 app.listen(port, () => {
     console.log(`The express app is ready on port ${port}!`);
