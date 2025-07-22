@@ -7,6 +7,9 @@ import morgan from 'morgan'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 
+import isSignedIn from './middleware/is-signed-in.js'
+import passUserToView from './middleware/pass-user-to-view.js'
+
 const app = express()
 
 const port = process.env.PORT || 3000
@@ -33,20 +36,16 @@ app.use(
     })
 )
 
-app.get("/", async (req,res) => {
-    res.render("index.ejs", {
-        user: req.session.user,
-    })
+app.use(passUserToView)
+
+app.get("/", (req, res) => {
+  res.render("index.ejs");
 })
 
 app.use('/auth', authController)
 
-app.get("/vip-lounge", (req, res) => {
-  if (req.session.user) {
+app.get("/vip-lounge", isSignedIn, (req, res) => {
     res.send(`Welcome to the party ${req.session.user.username}.`);
-  } else {
-    res.send("Sorry, no guests allowed.");
-  }
 });
 
 
