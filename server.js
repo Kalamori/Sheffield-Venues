@@ -14,6 +14,9 @@ import passUserToView from './middleware/pass-user-to-view.js'
 
 const app = express()
 
+app.set('view engine', 'ejs')
+app.set('views', './views')
+
 const port = process.env.PORT || 3000
 
 import authController from './controllers/auth.js'
@@ -42,7 +45,7 @@ app.use(passUserToView)
 
 app.get("/", (req, res) => {
     if (req.session.user) {
-        res.redirect(`/users/${req.session.user._id}/venues`)
+        res.redirect(`/venues`)
     } else {
     res.render("index.ejs");
     }
@@ -51,7 +54,7 @@ app.get("/", (req, res) => {
 
 app.use('/auth', authController)
 app.use(isSignedIn)
-app.use('/users/:userId/venues', venuesController)
+app.use('/venues', venuesController)
 
 app.listen(port, () => {
     console.log(`The express app is ready on port ${port}!`);

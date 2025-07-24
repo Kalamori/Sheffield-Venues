@@ -1,21 +1,27 @@
 <h1>Add a New Venue</h1>
+
+<% if (typeof error !== 'undefined') { %>
+<p class="error" style="color: red"><%= error %></p>
+<% } %>
+
 <form action="/venues" method="POST">
     <label>Name:</label>
-    <input type="text" name="name" required />
+    <input type="text" name="name" id="name" value="<%= oldInput ? oldInput.name : '' %>" required />
     <br>
     <label>Address:</label>
-    <input type="text" name="address" />
+    <input type="text" name="address" id="address" value="<%= oldInput ? oldInput.address : '' %>" required />
     <br>
     <label>Category:</label>
-    <input type="text" name="category" />
+    <input type="text" name="category" id="category" value="<%= oldInput ? oldInput.category : '' %>" required />
     <br>
     <label>Description</label>
     <textarea name="description"></textarea>
     <br>
     <label>Image URL:</label>
-    <input type="text" name="image_url" />
+    <input type="text" name="image_url" id="image_url" value="<%= oldInput ? oldInput.image_url : '' %>" required />
     <br>
     <label>Website:</label>
-    
-
+    <input type="text" name="website" id="website" value="<%= oldInput ? oldInput.website : '' %>" required />
+    <br>
+    <button type="submit"> Create Venue </button>
 </form>

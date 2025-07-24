@@ -3,11 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Your Apps</title>
+    <title>All Venues</title>
   </head>
   <body>
-    <h1>Your Apps</h1>
-<% include('../partials/_navbar.ejs') %>
+    <h1>All Venues</h1>
+
+<ul>
+<% venues.forEach(venue => { %>
+<li>
+<h2><%= venue.name %></h2>
+<img src="<%= venue.image_url %>" alt="Image of <%= venue.name %>" />
+<p>Address: <%= venue.address %></p>
+<p>Category: <%= venue.category %></p>
+<p>Description: <%= venue.description %></p>
+<p>Website: <a href="<%= venue.website %>" target="_blank" rel="noopener noreferrer"><%= venue.website %></a></p>
+<p></p>
+</li>
+<% }) %>
+</ul>
+
     <a href="/auth/sign-out">Sign out</a>
 
   </body>
