@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= venue.name %></title>
+</head>
+<body>
+    <h1><%= venue.name %></h1>
+    <p><strong>Address:</strong> <%= venue.address %></p>
+    <p><strong>Category:</strong> <%= venue.category %></p>
+    <p><strong>Description:</strong> <%= venue.description %></p>
+    <% if (venue.website) { %>
+        <p><a href="<%= venue.website %>">Visit Website</a></p>
+  <% } %>
+    <a href="/venues"> Back to all venues</a>
+</body>
+</html>

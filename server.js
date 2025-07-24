@@ -7,6 +7,8 @@ import morgan from 'morgan'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 
+import venuesController from './controllers/venues.js'
+
 import isSignedIn from './middleware/is-signed-in.js'
 import passUserToView from './middleware/pass-user-to-view.js'
 
@@ -39,16 +41,17 @@ app.use(
 app.use(passUserToView)
 
 app.get("/", (req, res) => {
-  res.render("index.ejs");
+    if (req.session.user) {
+        res.redirect(`/users/${req.session.user._id}/venues`)
+    } else {
+    res.render("index.ejs");
+    }
+
 })
 
 app.use('/auth', authController)
-
-app.get("/vip-lounge", isSignedIn, (req, res) => {
-    res.send(`Welcome to the party ${req.session.user.username}.`);
-});
-
-
+app.use(isSignedIn)
+app.use('/users/:userId/venues', venuesController)
 
 app.listen(port, () => {
     console.log(`The express app is ready on port ${port}!`);

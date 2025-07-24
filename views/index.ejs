@@ -1,25 +1,40 @@
-<!-- views/index.ejs -->
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
+    <title>Sheffield Venues</title>
   </head>
   <body>
 <% if (user) { %>
-<h1>Welcome to the app, <%= user.username %>!</h1>
-<p>
-  <!-- new sign out link -->
-  <a href="/auth/sign-out">Sign out</a>
-</p>
+<h1>Welcome to Sheffield Venues Info</h1>
+<p>Welcome, <%= user.username %>!</p>
+<nav>
+<h1><a href="/venues">All Venues</a></h1>
+
+<ul>
+<% venues.forEach(venue => { %>
+<li>
+    <h3><%= venue.name %></h3>
+    <p><%= venue.description %></p>
+    <p><% venue.address %> - <%= venue.category %></p>
+    <a href="/venues/<%= venue._id %>">View Details</a>
+</li>
+<% }) %>
+</ul>
+
+<a href="/auth/sign-out">Sign out</a>
+</nav>
 <% } else { %>
-<h1>Welcome to the app, guest.</h1>
-<p>
-  <a href="/auth/sign-up">Sign up</a> or <a href="/auth/sign-in">Sign in</a>.
-</p>
+<h1>Welcome to Sheffield Venues</h1>
+<nav>
+<a href="/auth/sign-up">Sign Up</a>
+  <a href="/auth/sign-in">Sign In</a>
+</nav>
 <% } %>
-<p><a href="/vip-lounge">Get into the VIP Users Only lounge!</a></p>
+<main>
+    <p>Discover the best venues in Sheffield</p>
+</main>
   </body>
 </html>
